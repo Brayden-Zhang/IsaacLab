@@ -16,7 +16,7 @@ from omni.isaac.lab_assets.franka import FRANKA_PANDA_HIGH_PD_CFG  # isort: skip
 
 
 @configclass
-class FrankaCabinetEnvCfg(joint_pos_env_cfg.FrankaCabinetEnvCfg):
+class FrankaCabinetEnvCfg(joint_pos_env_cfg.FrankaHockeyEnvCfg):
     def __post_init__(self):
         # post init of parent
         super().__post_init__()

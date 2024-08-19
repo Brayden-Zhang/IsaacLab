@@ -9,19 +9,22 @@ from omni.isaac.lab.utils import configclass
 
 from omni.isaac.lab_tasks.manager_based.manipulation.cabinet import mdp
 
-from omni.isaac.lab_tasks.manager_based.manipulation.cabinet.cabinet_env_cfg import (  # isort: skip
+from omni.isaac.lab_tasks.manager_based.manipulation.hockey.hockey_env_cfg import (  # isort: skip
     FRAME_MARKER_SMALL_CFG,
-    CabinetEnvCfg,
+    HockeyEnvCfg,
 )
 
 ##
 # Pre-defined configs
 ##
-from omni.isaac.lab_assets.franka import FRANKA_PANDA_CFG  # isort: skip
+from omni.isaac.lab_assets.franka import FRANKA_PANDA_CFG
+from omni.isaac.lab_tasks.manager_based.manipulation.hockey.hockey_env_cfg import HockeyEnvCfg, HockeySceneCfg  # isort: skip
 
 
 @configclass
-class FrankaCabinetEnvCfg(CabinetEnvCfg):
+class FrankaHockeyEnvCfg(HockeyEnvCfg):
+
+    
     def __post_init__(self):
         # post init of parent
         super().__post_init__()
@@ -29,19 +32,19 @@ class FrankaCabinetEnvCfg(CabinetEnvCfg):
         # Set franka as robot
         self.scene.robot = FRANKA_PANDA_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
 
-        # Set Actions for the specific robot type (franka)
-        self.actions.arm_action = mdp.JointPositionActionCfg(
-            asset_name="robot",
-            joint_names=["panda_joint.*"],
-            scale=1.0,
-            use_default_offset=True,
-        )
-        self.actions.gripper_action = mdp.BinaryJointPositionActionCfg(
-            asset_name="robot",
-            joint_names=["panda_finger.*"],
-            open_command_expr={"panda_finger_.*": 0.04},
-            close_command_expr={"panda_finger_.*": 0.0},
-        )
+        # # Set Actions for the specific robot type (franka)
+        # self.actions.arm_action = mdp.JointPositionActionCfg(
+        #     asset_name="robot",
+        #     joint_names=["panda_joint.*"],
+        #     scale=1.0,
+        #     use_default_offset=True,
+        # )
+        # self.actions.gripper_action = mdp.BinaryJointPositionActionCfg(
+        #     asset_name="robot",
+        #     joint_names=["panda_finger.*"],
+        #     open_command_expr={"panda_finger_.*": 0.04},
+        #     close_command_expr={"panda_finger_.*": 0.0},
+        # )
 
         # Listens to the required transforms
         # IMPORTANT: The order of the frames in the list is important. The first frame is the tool center point (TCP)
@@ -76,18 +79,18 @@ class FrankaCabinetEnvCfg(CabinetEnvCfg):
         )
 
         # override rewards
-        self.rewards.approach_gripper_handle.params["offset"] = 0.04
-        self.rewards.grasp_handle.params["open_joint_pos"] = 0.04
-        self.rewards.grasp_handle.params["asset_cfg"].joint_names = ["panda_finger_.*"]
+        # self.rewards.approach_gripper_handle.params["offset"] = 0.04
+        # self.rewards.grasp_handle.params["open_joint_pos"] = 0.04
+        # self.rewards.grasp_handle.params["asset_cfg"].joint_names = ["panda_finger_.*"]
 
 
-@configclass
-class FrankaCabinetEnvCfg_PLAY(FrankaCabinetEnvCfg):
-    def __post_init__(self):
-        # post init of parent
-        super().__post_init__()
-        # make a smaller scene for play
-        self.scene.num_envs = 50
-        self.scene.env_spacing = 2.5
-        # disable randomization for play
-        self.observations.policy.enable_corruption = False
+# @configclass
+# class FrankaCabinetEnvCfg_PLAY(FrankaCabinetEnvCfg):
+#     def __post_init__(self):
+#         # post init of parent
+#         super().__post_init__()
+#         # make a smaller scene for play
+#         self.scene.num_envs = 50
+#         self.scene.env_spacing = 2.5
+#         # disable randomization for play
+#         self.observations.policy.enable_corruption = False
