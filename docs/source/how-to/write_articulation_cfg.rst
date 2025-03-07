@@ -4,7 +4,7 @@
 Writing an Asset Configuration
 ==============================
 
-.. currentmodule:: omni.isaac.lab
+.. currentmodule:: isaaclab
 
 This guide walks through the process of creating an :class:`~assets.ArticulationCfg`.
 The :class:`~assets.ArticulationCfg` is a configuration object that defines the
@@ -22,7 +22,7 @@ is free to move along a rail, and the pole is free to rotate about the cart.
 .. dropdown:: Code for Cartpole configuration
    :icon: code
 
-   .. literalinclude:: ../../../source/extensions/omni.isaac.lab_assets/omni/isaac/lab_assets/cartpole.py
+   .. literalinclude:: ../../../source/isaaclab_assets/isaaclab_assets/robots/cartpole.py
       :language: python
       :linenos:
 
@@ -44,7 +44,7 @@ This configuration object takes in the following parameters:
 
 The last two parameters are optional. If not specified, they are kept at their default values in the USD file.
 
-.. literalinclude:: ../../../source/extensions/omni.isaac.lab_assets/omni/isaac/lab_assets/cartpole.py
+.. literalinclude:: ../../../source/isaaclab_assets/isaaclab_assets/robots/cartpole.py
    :language: python
    :lines: 19-35
    :dedent:
@@ -72,7 +72,7 @@ initial state of the root of the articulation and the initial state of all its j
 example, we will spawn the Cartpole at the origin of the XY plane at a Z height of 2.0 meters.
 Meanwhile, the joint positions and velocities are set to 0.0.
 
-.. literalinclude:: ../../../source/extensions/omni.isaac.lab_assets/omni/isaac/lab_assets/cartpole.py
+.. literalinclude:: ../../../source/isaaclab_assets/isaaclab_assets/robots/cartpole.py
    :language: python
    :lines: 36-38
    :dedent:
@@ -84,7 +84,7 @@ Actuators are a crucial component of an articulation. Through this configuration
 to define the type of actuator model to use. We can use the internal actuator model provided by
 the physics engine (i.e. the implicit actuator model), or use a custom actuator model which is
 governed by a user-defined system of equations (i.e. the explicit actuator model).
-For more details on actuators, see :ref:`feature-actuators`.
+For more details on actuators, see :ref:`overview-actuators`.
 
 The cartpole's articulation has two actuators, one corresponding to its each joint:
 ``cart_to_pole`` and ``slider_to_cart``. We use two different actuator models for these actuators as
@@ -94,7 +94,7 @@ to combine them into a single actuator model.
 .. dropdown:: Actuator model configuration with separate actuator models
    :icon: code
 
-   .. literalinclude:: ../../../source/extensions/omni.isaac.lab_assets/omni/isaac/lab_assets/cartpole.py
+   .. literalinclude:: ../../../source/isaaclab_assets/isaaclab_assets/robots/cartpole.py
       :language: python
       :lines: 39-49
       :dedent:

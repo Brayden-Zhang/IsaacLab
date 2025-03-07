@@ -24,8 +24,8 @@
 
 # Docker/Singularity
 **/*.sif
-docker/exports/
-docker/.container.yaml
+docker/cluster/exports/
+docker/.container.cfg
 
 # IDE
 **/.idea/
@@ -57,3 +57,6 @@ _build
 **/runs/*
 **/logs/*
 **/recordings/*
+
+# Pre-Trained Checkpoints
+/.pretrained_checkpoints/
